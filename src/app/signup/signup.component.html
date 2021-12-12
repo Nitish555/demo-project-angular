@@ -1,0 +1,37 @@
+<div class="container mt-3 mb-3">
+    <form class="justify-content-center">
+        <div class="form-group">
+            <label for="inputUser">User name</label>
+            <input type="text" class="form-control" name="username" [(ngModel)]="username" (keyup)="userNameRewuired(username)" id="inputUser" aria-describedby="userNameRequired" autocomplete="off">
+            <span *ngIf="userNameRequiredBool == false" id="userNameRequired" class="form-text" style="color:red"><small> User Name required</small></span>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail">Email address</label>
+            <input type="email" class="form-control" name="email" (keyup)="validateEmail(email)" [(ngModel)]="email"
+                id="inputEmail" aria-describedby="emailValidate" autocomplete="off">
+            <span *ngIf="emailValidateBool == false" id="emailValidate" class="form-text" style="color:red"><small> Enter a Valid
+                    Email</small></span>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword1">Password</label>
+            <input type="password" name="password" (keyup)="validatePassword(password)" [(ngModel)]="password"
+                class="form-control" id="inputPassword1" aria-describedby="passwordValidate" autocomplete="off">
+            <span *ngIf="passwordValidateBool === false" id="passwordValidate" class="form-text" style="color:red"><small>Password must
+                contain at least one small and capital alphabet, numbers and special characters and length should be >=8</small></span>
+        </div>
+        <div class="form-group">
+            <label for="inputPhone">Phone</label>
+            <input type="text" name="phone" [(ngModel)]="phone" class="form-control" id="phone" autocomplete="off">
+        </div>
+        <div class="form-group">
+            <label for="inputAddress">Address</label>
+            <textarea rows="2" cols="20" name="address" [(ngModel)]="address" class="form-control"
+                id="inputAddress" autocomplete="off"> </textarea>
+        </div>
+        <div class="row ml-1">     
+            <button [disabled]="!emailValidateBool && !passwordValidateBool && !userNameRequiredBool" type="Submit" class="btn btn-primary btn-lg" (click)="signUp()">Create
+                Account</button>    
+                <button class="btn btn-secondary btn-sm ml-3" (click)="cancel()"> Go to login</button>
+        </div>
+    </form>
+</div>

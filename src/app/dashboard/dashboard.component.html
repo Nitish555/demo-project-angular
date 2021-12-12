@@ -1,0 +1,73 @@
+<div class="container mt-3 mb-3">
+    <div class="row">
+        <div class="col-md-6">
+            <a *ngIf="userTypeBoolean && tableData.length > 0" href="javascript:void(0);" (click)="GoToList()">ALL User List</a>
+        </div>
+        <div class="col-md-6">
+            <button class="btn btn-secondary btn-sm float-right" (click)="Logout()">Logout</button>
+        </div>
+    </div>
+
+    <ng-container *ngIf="tableData.length===0; else readOnlyInputs">
+        <form class="row g-3" *ngIf="userTypeBoolean">
+            <div class="col-md-6">
+                <label for="inputUserName" class="form-label">Username</label>
+                <input type="text"readonly class="form-control" [(ngModel)]="username" name="username" id="inputUserName">
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail" class="form-label">Email</label>            
+                <input type="email" readonly class="form-control" [(ngModel)]="email" name="email" id="inputEmail">            
+            </div>
+            <div class="col-md-6">
+                <label for="inputPhone" class="form-label">Phone</label>
+                <input type="text" class="form-control" [(ngModel)]="phone" name="phone" id="inputPhone">
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Address</label>
+                <textarea row="3" class="form-control" [(ngModel)]="address" name="address" id="inputAddress"></textarea>
+            </div>
+            <div class="row mt-3 ml-3">
+                <button type="button" class="btn btn-primary btn-lg" (click)="updateData()">Update
+                    Profile</button>
+            </div>
+        </form>
+    </ng-container>
+
+    <ng-template #readOnlyInputs>
+        <form class="row g-3" *ngIf="userTypeBoolean">
+            <div class="col-md-6">
+                <label for="inputUserName" class="form-label">Username</label>
+                <input type="text" readonly class="form-control" [(ngModel)]="username" name="username" id="inputUserName">
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail" class="form-label">Email</label>            
+                <input type="email" readonly class="form-control" [(ngModel)]="email" name="email" id="inputEmail">            
+            </div>
+            <div class="col-md-6">
+                <label for="inputPhone" class="form-label">Phone</label>
+                <input type="text" readonly class="form-control" [(ngModel)]="phone" name="phone" id="inputPhone">
+            </div>
+            <div class="col-12">
+                <label for="inputAddress" class="form-label">Address</label>
+                <textarea row="3" readonly class="form-control" [(ngModel)]="address" name="address" id="inputAddress"></textarea>
+            </div>
+        </form>
+    </ng-template>
+
+    <table class="table mt-3" *ngIf="!userTypeBoolean">
+        <thead>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Address</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of tableData">                
+                <td><a href="javascript:void(0);" (click)="goToUserProfile(data._id)">{{ data.username | titlecase }}</a></td>
+                <td>{{ data.email }}</td>
+                <td>{{ data.phone }}</td>
+                <td>{{ data.address | titlecase }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
